@@ -1,0 +1,146 @@
+{
+  "Player": {
+    "Name": "Player 1",
+    "Credits": 4700,
+    "Position": 9,
+    "OwnedPlanets": [],
+    "Cards": [
+      {
+        "Type": 2,
+        "Description": "This ticket allows you to travel to any galactic railway station.",
+        "Effect": null
+      }
+    ],
+    "SkippedTurnsCounter": 1,
+    "IsSkippingTurn": true,
+    "LostTurns": 0
+  },
+  "Galaxy": {
+    "SolarSystems": [
+      {
+        "Name": "System-1",
+        "Planets": [
+          {
+            "Name": "Planet-1-1",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          }
+        ],
+        "Position": 11
+      },
+      {
+        "Name": "System-2",
+        "Planets": [
+          {
+            "Name": "Planet-2-1",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          },
+          {
+            "Name": "Planet-2-2",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          },
+          {
+            "Name": "Planet-2-3",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          }
+        ],
+        "Position": 34
+      },
+      {
+        "Name": "System-3",
+        "Planets": [
+          {
+            "Name": "Planet-3-1",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          },
+          {
+            "Name": "Planet-3-2",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          }
+        ],
+        "Position": 28
+      },
+      {
+        "Name": "System-4",
+        "Planets": [
+          {
+            "Name": "Planet-4-1",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          },
+          {
+            "Name": "Planet-4-2",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          },
+          {
+            "Name": "Planet-4-3",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          },
+          {
+            "Name": "Planet-4-4",
+            "Owner": null,
+            "Structures": [],
+            "HasSpaceport": false
+          }
+        ],
+        "Position": 21
+      }
+    ],
+    "AnomalyPositions": [
+      17,
+      4
+    ],
+    "PiratePositions": [
+      8,
+      9
+    ],
+    "RailwayStations": [
+      16,
+      38,
+      22
+    ],
+    "TotalPositions": 40
+  },
+  "Economy": {
+    "BaseIncome": 200,
+    "TurnsBetweenPayments": 5,
+    "PropertyTaxRate": 0.1,
+    "PirateRansom": 500,
+    "TowingCost": 300,
+    "ShipyardRepairCost": 2000,
+    "BuildingCosts": {
+      "Spaceport": 1000,
+      "Outpost": 800,
+      "Mine": 1200,
+      "FoodFarm": 800,
+      "GalacticShipyard": 8000,
+      "AsteroidMine": 1500
+    },
+    "UpgradeCosts": {
+      "Outpost": 1000,
+      "Habitat": 2000,
+      "Colony": 3000,
+      "GalacticHotel": 5000,
+      "Mine": 1500,
+      "FoodFarm": 1000,
+      "AsteroidMine": 2000
+    }
+  },
+  "CurrentTurn": 7
+}
