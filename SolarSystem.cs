@@ -1,32 +1,34 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Newtonsoft.Json;
-
-public class SolarSystem
+namespace GalaxyGame
 {
-    public string Name { get; set; }
-    public List<Planet> Planets { get; set; } = new List<Planet>();
-    public int Position { get; set; }
-
-    public SolarSystem(string name, int position)
+    public class SolarSystem
     {
-        Name = name;
-        Position = position;
-    }
+        public string Name { get; set; }
+        public List<Planet> Planets { get; set; } = new List<Planet>();
+        public int Position { get; set; }
 
-    public void AddPlanet(string name)
-    {
-        Planets.Add(new Planet(name, this));
-    }
-
-    public bool HasGalacticShipyard()
-    {
-        foreach (var planet in Planets)
+        public SolarSystem(string name, int position)
         {
-            if (planet.Structures.Exists(s => s.Type == StructureType.GalacticShipyard))
-            {
-                return true;
-            }
+            Name = name;
+            Position = position;
         }
-        return false;
+
+        public void AddPlanet(string name)
+        {
+            Planets.Add(new Planet(name, this));
+        }
+
+        public bool HasGalacticShipyard()
+        {
+            foreach (var planet in Planets)
+            {
+                if (planet.Structures.Exists(s => s.Type == StructureType.GalacticShipyard))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
 }

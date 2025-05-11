@@ -1,28 +1,31 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using Newtonsoft.Json;
 
-public class Economy
+namespace GalaxyGame
 {
-    public int BaseIncome { get; set; }
-    public int TurnsBetweenPayments { get; set; }
-    public double PropertyTaxRate { get; set; }
-    public int PirateRansom { get; set; }
-    public int TowingCost { get; set; }
-    public int ShipyardRepairCost { get; set; }
-    public Dictionary<StructureType, int> BuildingCosts { get; set; }
-    public Dictionary<StructureType, int> UpgradeCosts { get; set; }
-
-    public Economy()
+    public class Economy
     {
-        BaseIncome = 200;
-        TurnsBetweenPayments = 5;
-        PropertyTaxRate = 0.1; // 10%
-        PirateRansom = 500;
-        TowingCost = 300;
-        ShipyardRepairCost = 2000;
+        public int BaseIncome { get; set; }
+        public int TurnsBetweenPayments { get; set; }
+        public double PropertyTaxRate { get; set; }
+        public int PirateRansom { get; set; }
+        public int TowingCost { get; set; }
+        public int ShipyardRepairCost { get; set; }
+        public Dictionary<StructureType, int> BuildingCosts { get; set; }
+        public Dictionary<StructureType, int> UpgradeCosts { get; set; }
 
-        BuildingCosts = new Dictionary<StructureType, int>
+        public Economy()
+        {
+            BaseIncome = 200;
+            TurnsBetweenPayments = 5;
+            PropertyTaxRate = 0.1; // 10%
+            PirateRansom = 500;
+            TowingCost = 300;
+            ShipyardRepairCost = 2000;
+
+            BuildingCosts = new Dictionary<StructureType, int>
         {
             { StructureType.Spaceport, 1000 },
             { StructureType.Outpost, 800 },
@@ -32,7 +35,7 @@ public class Economy
             { StructureType.AsteroidMine, 1500 }
         };
 
-        UpgradeCosts = new Dictionary<StructureType, int>
+            UpgradeCosts = new Dictionary<StructureType, int>
         {
             { StructureType.Outpost, 1000 }, // Cost to upgrade from Outpost to Habitat
             { StructureType.Habitat, 2000 }, // Cost to upgrade from Habitat to Colony
@@ -42,60 +45,61 @@ public class Economy
             { StructureType.FoodFarm, 1000 }, // Cost to upgrade FoodFarm (per level)
             { StructureType.AsteroidMine, 2000 } // Cost to upgrade AsteroidMine (per level)
         };
-    }
-
-    public int CalculatePlayerIncome(Player player)
-    {
-        int income = BaseIncome;
-
-        foreach (var planet in player.OwnedPlanets)
-        {
-            foreach (var structure in planet.Structures)
-            {
-                income += structure.IncomePerTurn;
-            }
         }
 
-        return income;
-    }
-
-    public int CalculatePropertyTax(Player player)
-    {
-        int totalPropertyValue = 0;
-
-        foreach (var planet in player.OwnedPlanets)
+        public int CalculatePlayerIncome(Player player)
         {
-            if (planet.HasSpaceport)
+            int income = BaseIncome;
+
+            foreach (var planet in player.OwnedPlanets)
             {
-                totalPropertyValue += BuildingCosts[StructureType.Spaceport];
+                foreach (var structure in planet.Structures)
+                {
+                    income += structure.IncomePerTurn;
+                }
             }
 
-            foreach (var structure in planet.Structures)
-            {
-                totalPropertyValue += structure.Value;
-            }
+            return income;
         }
 
-        return (int)(totalPropertyValue * PropertyTaxRate);
-    }
-
-    public bool CanAfford(Player player, int cost)
-    {
-        return player.Credits >= cost;
-    }
-
-    public void ChargeFee(Player player, int amount)
-    {
-        if (!CanAfford(player, amount))
+        public int CalculatePropertyTax(Player player)
         {
-            throw new InvalidOperationException("Player cannot afford this fee.");
+            int totalPropertyValue = 0;
+
+            foreach (var planet in player.OwnedPlanets)
+            {
+                if (planet.HasSpaceport)
+                {
+                    totalPropertyValue += BuildingCosts[StructureType.Spaceport];
+                }
+
+                foreach (var structure in planet.Structures)
+                {
+                    totalPropertyValue += structure.Value;
+                }
+            }
+
+            return (int)(totalPropertyValue * PropertyTaxRate);
         }
 
-        player.Credits -= amount;
-    }
+        public bool CanAfford(Player player, int cost)
+        {
+            return player.Credits >= cost;
+        }
 
-    public void AddCredits(Player player, int amount)
-    {
-        player.Credits += amount;
+        public void ChargeFee(Player player, int amount)
+        {
+            if (!CanAfford(player, amount))
+            {
+                throw new InvalidOperationException("Player cannot afford this fee.");
+            }
+
+            player.Credits -= amount;
+        }
+
+        public void AddCredits(Player player, int amount)
+        {
+            player.Credits += amount;
+        }
     }
 }
